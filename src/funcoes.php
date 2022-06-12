@@ -162,8 +162,13 @@ class Funcoes
         for($i = 0; $i < $qtd_elem; $i++){
             $current_arr = $arr;
             unset($current_arr[$i]);
+            array_unshift($current_arr,"");
+            unset($current_arr[0]);
             $sorted = array_values($current_arr);
             sort($sorted);
+            $sorted = array_unique($sorted);//remove duplicidades
+            array_unshift($sorted,"");
+            unset($sorted[0]);
 
             if($current_arr === $sorted){
                 array_push($validacao, 'true');
