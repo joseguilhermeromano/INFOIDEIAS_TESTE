@@ -182,5 +182,7 @@ $arr = array (
 echo "<pre>";
 echo "TESTES DA FUNÇÃO SEGUNDO MAIOR: \n\n";
 echo Funcoes::SegundoMaior($arr)."\n";
+$arr = [22, 23, 24];
+echo Funcoes::SegundoMaior($arr)."\n";
 echo "</pre>";
 
