@@ -15,7 +15,20 @@ class Funcoes
 
      * */
     public function SeculoAno(int $ano): int {
-        
+        if($ano <= 0 ){
+            return 0;
+        }
+
+        $qtd_digitos = mb_strlen($ano);
+
+        if($qtd_digitos < 3){
+            return 1;
+        }elseif(($ano % 100) != 0 ){
+           $seculo = floor($ano/100);
+           return $seculo + 1;
+        }
+
+        return ($ano/100);
     }
 
     
@@ -110,3 +123,16 @@ class Funcoes
         
     }
 }
+
+//TESTES PARTICULARES
+echo "<pre>";
+echo Funcoes::SeculoAno(33333)."\n";
+echo Funcoes::SeculoAno(2022)."\n";
+echo Funcoes::SeculoAno(1968)."\n";
+echo Funcoes::SeculoAno(645)."\n";
+echo Funcoes::SeculoAno(107)."\n";
+echo Funcoes::SeculoAno(45)."\n";
+echo Funcoes::SeculoAno(0)."\n";
+echo "</pre>";
+
+
