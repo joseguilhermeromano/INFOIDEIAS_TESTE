@@ -96,13 +96,13 @@ class Funcoes
      * */
     public function SegundoMaior(array $arr): int {
         $vetor = [];
-        //checa se o array é válido
+        //checa se o array é válido (multidimensional)
         if(count($arr) == count($arr, COUNT_RECURSIVE)){
             return 0;
         }
 
-        foreach($arr as $subArr){
-            foreach ($subArr as $elem){
+        foreach($arr as $sub_arr){
+            foreach ($sub_arr as $elem){
                 array_push($vetor, $elem);
             }
         }
@@ -142,8 +142,37 @@ class Funcoes
 
      * */
     
-	public function SequenciaCrescente(array $arr): boolean {
-        
+	public function SequenciaCrescente(array $arr): bool {
+        $validacao = [];
+
+        //checa se o array é válido (multidimensional)
+        if(!(count($arr) == count($arr, COUNT_RECURSIVE))){
+            return false;
+        }
+
+        //não aceita arrays com strings
+        foreach($arr as $elem){
+            if(!is_numeric($elem)){
+                return false;
+            }
+        }
+
+        $qtd_elem = count($arr);
+
+        for($i = 0; $i < $qtd_elem; $i++){
+            $current_arr = $arr;
+            unset($current_arr[$i]);
+            $sorted = array_values($current_arr);
+            sort($sorted);
+
+            if($current_arr === $sorted){
+                array_push($validacao, 'true');
+            }else{
+                array_push($validacao, 'false');
+            }
+        }
+
+        return in_array('true', $validacao) ? true : false;
     }
 }
 
@@ -184,5 +213,28 @@ echo "TESTES DA FUNÇÃO SEGUNDO MAIOR: \n\n";
 echo Funcoes::SegundoMaior($arr)."\n";
 $arr = [22, 23, 24];
 echo Funcoes::SegundoMaior($arr)."\n";
+echo "</pre>";
+
+echo "<pre>";
+echo "TESTES DA FUNÇÃO SEQUENCIA CRESCENTE: \n\n";
+echo "[1, 3, 2, 1]:".(Funcoes::SequenciaCrescente([1, 3, 2, 1]) ? 'true' : 'false')."\n";
+echo "[1, 3, 2]:".(Funcoes::SequenciaCrescente([1, 3, 2])? 'true' : 'false')."\n";
+echo "[1, 2, 1, 2]:".(Funcoes::SequenciaCrescente([1, 2, 1, 2])? 'true' : 'false')."\n";
+echo "[3, 6, 5, 8, 10, 20, 15]:".(Funcoes::SequenciaCrescente([3, 6, 5, 8, 10, 20, 15])? 'true' : 'false')."\n";
+echo "[1, 1, 2, 3, 4, 4]:".(Funcoes::SequenciaCrescente([1, 1, 2, 3, 4, 4])? 'true' : 'false')."\n";
+echo "[1, 4, 10, 4, 2]:".(Funcoes::SequenciaCrescente([1, 4, 10, 4, 2])? 'true' : 'false')."\n";
+echo "[10, 1, 2, 3, 4, 5]:".(Funcoes::SequenciaCrescente([10, 1, 2, 3, 4, 5])? 'true' : 'false')."\n";
+echo "[1, 1, 1, 2, 3]:".(Funcoes::SequenciaCrescente([1, 1, 1, 2, 3])? 'true' : 'false')."\n";
+echo "[0, -2, 5, 6]:".(Funcoes::SequenciaCrescente([0, -2, 5, 6])? 'true' : 'false')."\n";
+echo "[1, 2, 3, 4, 5, 3, 5, 6]:".(Funcoes::SequenciaCrescente([1, 2, 3, 4, 5, 3, 5, 6])? 'true' : 'false')."\n";
+echo "[40, 50, 60, 10, 20, 30]:".(Funcoes::SequenciaCrescente([40, 50, 60, 10, 20, 30])? 'true' : 'false')."\n";
+echo "[1, 1]:".(Funcoes::SequenciaCrescente([1, 1])? 'true' : 'false')."\n";
+echo "[1, 2, 5, 3, 5]:".(Funcoes::SequenciaCrescente([1, 2, 5, 3, 5])? 'true' : 'false')."\n";
+echo "[1, 2, 5, 5, 5]:".(Funcoes::SequenciaCrescente([1, 2, 5, 5, 5])? 'true' : 'false')."\n";
+echo "[10, 1, 2, 3, 4, 5, 6, 1]:".(Funcoes::SequenciaCrescente([10, 1, 2, 3, 4, 5, 6, 1])? 'true' : 'false')."\n";
+echo "[1, 2, 3, 4, 3, 6]:".(Funcoes::SequenciaCrescente([1, 2, 3, 4, 3, 6])? 'true' : 'false')."\n";
+echo "[1, 2, 3, 4, 99, 5, 6]:".(Funcoes::SequenciaCrescente([1, 2, 3, 4, 99, 5, 6])? 'true' : 'false')."\n";
+echo "[123, -17, -5, 1, 2, 3, 12, 43, 45]:".(Funcoes::SequenciaCrescente([123, -17, -5, 1, 2, 3, 12, 43, 45])? 'true' : 'false')."\n";
+echo "[3, 5, 67, 98, 3]:".(Funcoes::SequenciaCrescente([3, 5, 67, 98, 3])? 'true' : 'false')."\n";
 echo "</pre>";
 
