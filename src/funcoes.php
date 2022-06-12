@@ -30,7 +30,6 @@ class Funcoes
 
         return ($ano/100);
     }
-
 	
 	/*
 
@@ -79,15 +78,6 @@ class Funcoes
         
     }
 
-
-
-
-
-
-
-
-
-
     /*
 
     Desenvolva uma função que receba como parâmetro um array multidimensional de números inteiros e retorne como resposta o segundo maior número.
@@ -105,15 +95,22 @@ class Funcoes
 
      * */
     public function SegundoMaior(array $arr): int {
-        
+        $vetor = [];
+        //checa se o array é válido
+        if(count($arr) == count($arr, COUNT_RECURSIVE)){
+            return 0;
+        }
+
+        foreach($arr as $subArr){
+            foreach ($subArr as $elem){
+                array_push($vetor, $elem);
+            }
+        }
+
+        array_multisort($vetor, SORT_DESC, array_keys($vetor));
+
+        return $vetor[1];
     }
-	
-	
-	
-	
-	
-	
-	
 
     /*
    Desenvolva uma função que receba como parâmetro um array de números inteiros e responda com TRUE or FALSE se é possível obter uma sequencia crescente removendo apenas um elemento do array.
@@ -174,4 +171,16 @@ echo Funcoes::PrimoAnterior(-10)."\n";
 echo Funcoes::PrimoAnterior(-29)."\n";
 echo "</pre>";
 
+$arr = array (
+    array(25,22,18),
+    array(10,15,13),
+    array(24,5,2),
+    array(80,17,15)
+);
+
+
+echo "<pre>";
+echo "TESTES DA FUNÇÃO SEGUNDO MAIOR: \n\n";
+echo Funcoes::SegundoMaior($arr)."\n";
+echo "</pre>";
 
