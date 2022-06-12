@@ -31,13 +31,6 @@ class Funcoes
         return ($ano/100);
     }
 
-    
-	
-	
-	
-	
-	
-	
 	
 	/*
 
@@ -50,6 +43,39 @@ class Funcoes
 
      * */
     public function PrimoAnterior(int $numero): int {
+        $primos = [];
+        $eNegativo = false;
+
+        if($numero == 0) {
+            return 0;
+        }
+
+        if($numero < 0){
+            $eNegativo = true;
+            $numero *= -1;
+        }
+
+        for($a = 1; $a <= $numero; $a++){
+            $divisores = 0;
+            for($b = $a; $b >= 1; $b--){
+                if(($a % $b) == 0){
+                    $divisores++;
+                }
+            }
+
+            if($divisores == 2 && $a != $numero){
+                array_push($primos, $a); 
+            }
+        }
+
+        $numElementos = count($primos);
+        $ultimo_elemento = $primos[$numElementos - 1];
+
+        if($eNegativo){
+            $ultimo_elemento *= -1;
+        }
+
+        return $ultimo_elemento;
         
     }
 
@@ -126,6 +152,9 @@ class Funcoes
 
 //TESTES PARTICULARES
 echo "<pre>";
+echo "TESTES DA FUNÇÃO SELCULO ANO: \n\n";
+echo Funcoes::SeculoAno(1905)."\n";
+echo Funcoes::SeculoAno(1700)."\n";
 echo Funcoes::SeculoAno(33333)."\n";
 echo Funcoes::SeculoAno(2022)."\n";
 echo Funcoes::SeculoAno(1968)."\n";
@@ -133,6 +162,16 @@ echo Funcoes::SeculoAno(645)."\n";
 echo Funcoes::SeculoAno(107)."\n";
 echo Funcoes::SeculoAno(45)."\n";
 echo Funcoes::SeculoAno(0)."\n";
+echo "</pre>";
+
+echo "<pre>";
+echo "TESTES DA FUNÇÃO PRIMO ANTERIOR: \n\n";
+echo Funcoes::PrimoAnterior(19)."\n";
+echo Funcoes::PrimoAnterior(10)."\n";
+echo Funcoes::PrimoAnterior(29)."\n";
+echo Funcoes::PrimoAnterior(0)."\n";
+echo Funcoes::PrimoAnterior(-10)."\n";
+echo Funcoes::PrimoAnterior(-29)."\n";
 echo "</pre>";
 
 
